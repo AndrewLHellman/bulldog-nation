@@ -29,6 +29,8 @@ class Game:
   def detectPlayerCollision(self):
     if (self.camera_view == 'top'):
       for object in self.map.objects:
+        if not object.hasTopView():
+          continue
         if (self.player.top_rect.colliderect(object.top_rect)):
           object.top_surf.fill((0, 255, 0))
         else:

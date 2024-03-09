@@ -22,3 +22,9 @@ class Vector3:
       self.x *= length / norm
       self.y *= length / norm
       self.z *= length / norm
+
+  def normalize_xy(self, length):
+    norm = sqrt(self.x*self.x + self.y*self.y)
+    if norm != 0:
+      self.x *= length / norm
+      self.y *= length / norm

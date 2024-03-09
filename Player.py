@@ -3,10 +3,14 @@ from math import sqrt
 from Vector3 import Vector3
 
 MOVE_SPEED = 1
+THRUST_SPEED = 2
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 64
-Z_ACCEL = -0.00003
+Z_ACCEL = -0.002
 MAX_Z_VELOCITY = -3
+
+pygame.font.init()
+my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 class Player:
   def __init__(self, screen):
@@ -34,21 +38,22 @@ class Player:
 
   # Args = direction
   def move(self, vec):
-    vec.normalize(MOVE_SPEED)
+    vec.normalize_xy(MOVE_SPEED)
+    vec.z *= THRUST_SPEED
     self.position.add(vec)
 
   def update(self, keys, camera_view, screen):
     self.handleKeys(keys, camera_view)
     # print(self.position.z)
-    if self.position.z > -100:
+    if self.position.z > -200:
       self.z_velocity += Z_ACCEL
       # print(f"z velo: {self.z_velocity}")
       self.z_velocity = max(self.z_velocity, MAX_Z_VELOCITY)
       self.position.z += self.z_velocity
-      self.position.z = max(self.position.z, -100)
       # exit(0)
     else:
       self.z_velocity = 0
+    self.position.z = max(self.position.z, -200)
     print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
     self.top_rect.update((self.position.x - (self.top_rect.width)/2, self.position.y - self.top_rect.height/2), (self.top_rect.width, self.top_rect.height))
     self.side_rect.update((self.position.x - (self.side_rect.width)/2, self.position.z - self.side_rect.height/2), (self.side_rect.width, self.side_rect.height))
@@ -80,4 +85,6 @@ class Player:
     else:
       screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
       print(self.position.x, self.position.z)
+    text_surface = my_font.render("(%.2f, %.2f, %.2f)" % (self.position.x, self.position.y, self.position.z), False, (0, 0, 0))
+    screen.blit(text_surface, (0,0))
     
