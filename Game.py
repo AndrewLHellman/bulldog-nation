@@ -29,11 +29,11 @@ class Game:
   def detectPlayerCollision(self):
     if (self.camera_view == 'top'):
       for object in self.map.objects:
-        if (self.player.top_rect.colliderect(object.topRect)):
-          object.topSurf.fill((0, 255, 0))
+        if (self.player.top_rect.colliderect(object.top_rect)):
+          object.top_surf.fill((0, 255, 0))
           print("Boom!")
     if (self.camera_view == 'side'):
       for object in self.map.objects:
-        if (self.player.side_rect.colliderect(object.sideRect)):
-          object.sideSurf.fill((0, 255, 0))
+        if (self.player.side_rect.colliderect(object.side_rect)):
+          object.side_surf.fill((0, 255, 0))
           print("Boom!")

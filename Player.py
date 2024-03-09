@@ -14,7 +14,7 @@ class Player:
     self.z_velocity = 0
     self.top_surf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
     self.top_surf.fill((255, 0, 0))
-    self.side_surf = pygame.image.load('./Game Jam Sprites/PlayerSideViewSprite1.png').convert()
+    self.side_surf = pygame.image.load('./source/sprites/playerSideRight.png').convert()
     self.side_surf.set_colorkey((0, 0, 0))
     self.top_rect = self.top_surf.get_rect(center=(self.position.x, self.position.y))
     self.side_rect = self.side_surf.get_rect(center=(self.position.x, self.position.z))
