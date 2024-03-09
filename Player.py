@@ -3,6 +3,7 @@ from math import sqrt
 
 MOVE_SPEED = 0.05
 SQRT_2 = sqrt(2)
+PLAYER_SIZE = 64
 
 class Player:
   def __init__(self):
@@ -13,8 +14,8 @@ class Player:
   # Args = direction
   def move(self, dx, dy):
     if dx != 0 and dy != 0:
-      dx = MOVE_SPEED / SQRT_2
-      dy = MOVE_SPEED / SQRT_2
+      dx *= MOVE_SPEED / SQRT_2
+      dy *= MOVE_SPEED / SQRT_2
     else:
       dx *= MOVE_SPEED
       dy *= MOVE_SPEED
@@ -33,4 +34,7 @@ class Player:
     elif keys[pygame.K_a]:
       dx = -1
     self.move(dx, dy)
+
+  def render(self, screen):
+    pygame.draw.rect(screen, (255, 0, 0), [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE])
     

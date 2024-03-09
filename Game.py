@@ -9,5 +9,6 @@ class Game:
   
   def render(self, screen):
     self.map.render(screen, self.player.x, self.player.y)
+    self.player.render(screen)
 
     
