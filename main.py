@@ -21,7 +21,6 @@ def main():
         keys = pygame.key.get_pressed()
         game.update(keys, screen)
         # pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
-        game.detectPlayerCollision()
         game.render(screen)
 
         pygame.display.flip()

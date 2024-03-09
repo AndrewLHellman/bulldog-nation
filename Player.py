@@ -5,7 +5,7 @@ from Vector3 import Vector3
 MOVE_SPEED = 1
 THRUST_SPEED = -1.5
 SQRT_2 = sqrt(2)
-PLAYER_SIZE = 64
+PLAYER_SIZE = 96
 Z_ACCEL = 0.003
 MAX_Z_VELOCITY = 5
 
@@ -39,23 +39,41 @@ class Player:
 
 
   # vec = direction
-  def move(self, vec):
+  def move(self, vec, map, camera_view):
     vec.normalize_xy(MOVE_SPEED)
     if self.is_jump_pressed or self.position.z > 199:
       self.is_jump_pressed = True
       vec.z *= THRUST_SPEED
     else:
       vec.z = 0
-    self.position.add(vec)
+    newPos = Vector3(self.position.x, self.position.y, self.position.z)
+    newPos.add(vec)
+    self.moveToPosition(self.position, newPos, map, camera_view)
+  
+  def moveToPosition(self, old_pos, new_pos, map, camera_view):
+    if old_pos.x != new_pos.x or old_pos.y != new_pos.y or old_pos.z != new_pos.z:
+      if map.canPlayerMoveToPosition(new_pos, self, camera_view):
+        print('no conflict')
+        self.position = new_pos
+      elif map.canPlayerMoveToPosition(Vector3(old_pos.x, new_pos.y, new_pos.z), self, camera_view):
+        self.position = Vector3(old_pos.x, new_pos.y, new_pos.z)
+      elif map.canPlayerMoveToPosition(Vector3(new_pos.x, old_pos.y, new_pos.z), self, camera_view):
+        self.position = Vector3(new_pos.x, old_pos.y, new_pos.z)
+      elif map.canPlayerMoveToPosition(Vector3(new_pos.x, new_pos.y, old_pos.z), self, camera_view):
+        self.position = Vector3(new_pos.x, new_pos.y, old_pos.z)
 
-  def update(self, keys, camera_view, screen):
-    self.handleKeys(keys, camera_view)
-    print(self.position.z)
+
+  def update(self, keys, camera_view, screen, map):
+    self.handleKeys(keys, camera_view, map)
+    # print(self.position.z)
     if self.position.z < 199:
       self.z_velocity += Z_ACCEL
       # print(f"z velo: {self.z_velocity}")
       self.z_velocity = min(self.z_velocity, MAX_Z_VELOCITY)
-      self.position.z += self.z_velocity
+      newPos = Vector3(self.position.x, self.position.y, self.position.z)
+      newPos.z += self.z_velocity
+      self.moveToPosition(self.position, newPos, map, camera_view)
+      # self.position.z += self.z_velocity
       # exit(0)
     else:
       self.z_velocity = 0
@@ -70,7 +88,7 @@ class Player:
       self.side_surf = self.img[self.facing_lr]
 
 
-  def handleKeys(self, keys, camera_view):
+  def handleKeys(self, keys, camera_view, map):
     dx = 0
     dy = 0 # y is the non-x direction here
     if keys[pygame.K_w]:
@@ -85,14 +103,14 @@ class Player:
       dx = -1
       self.facing_lr = 'Left'
     if camera_view == 'top':
-      self.move(Vector3(dx, dy, 0))
+      self.move(Vector3(dx, dy, 0), map, camera_view)
     else:
       jump = 0
       if keys[pygame.K_w]:
         jump = 1
       else:
         self.is_jump_pressed = False
-      self.move(Vector3(dx, 0, jump))
+      self.move(Vector3(dx, 0, jump), map, camera_view)
 
   def render(self, screen, camera_view):
     if camera_view == 'top':

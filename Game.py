@@ -19,27 +19,10 @@ class Game:
 
   def update(self, keys, screen):
     self.handleKeys(keys)
-    self.player.update(keys, self.camera_view, screen)
+    self.player.update(keys, self.camera_view, screen, self.map)
 
   def handleKeys(self, keys):
     if keys[pygame.K_TAB] and time() - self.tab_last_pressed > 0.5:
       self.tab_last_pressed = time()
       self.toggleCameraView()
 
-  def detectPlayerCollision(self):
-    if (self.camera_view == 'top'):
-      for object in self.map.objects:
-        if not object.hasTopView():
-          continue
-        if (self.player.top_rect.colliderect(object.top_rect)):
-          object.top_surf.fill((0, 255, 0))
-        else:
-          object.top_surf.fill(object.color)
-          #print("Boom!")
-    elif (self.camera_view == 'side'):
-      for object in self.map.objects:
-        if (self.player.side_rect.colliderect(object.side_rect)):
-          object.side_surf.fill((0, 255, 0))
-          #print("Boom!")
-        else:
-          object.side_surf.fill(object.color)
