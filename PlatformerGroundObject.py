@@ -3,22 +3,24 @@ from MapObject import MapObject
 from Vector3 import Vector3
 
 class PlatformerGroundObject(MapObject):
-  def __init__(self):
-    self.pos = Vector3(-5000,-5000,-800)
-    self.width = 10000
-    self.depth = 10000
+  def __init__(self, x):
+    self.pos = Vector3(x ,-600,-800)
+    self.width = 2000
+    self.depth = 1200
     self.height = 500
-    self.color = (0, 0, 0)
     self.top_surf = pygame.surface.Surface((self.width, self.depth))
-    self.top_surf.fill(self.color)
+    img = pygame.image.load('./source/sprites/FloorTile-1.png').convert()
+    self.top_surf.blit(pygame.transform.scale(img, (self.width, self.depth)), (0 , 0))
+    #self.top_surf.fill(self.color)
     self.side_surf = pygame.surface.Surface((self.width, self.height))
-    self.side_surf.fill(self.color)
+    img = pygame.image.load('./source/sprites/BackgroundFloorUpdated.png').convert()
+    self.side_surf.blit(pygame.transform.scale(img, (self.width, 300)), (0, 0))
     #self.top_rect = self.top_surf.get_rect(center=(self.pos.x+self.width/2, self.pos.y + self.depth/2))
     self.side_rect = self.side_surf.get_rect(center=(self.pos.x, self.pos.z))
 
   def render(self, screen, camera_view, p_pos):
     if camera_view == 'top':
-      render_pos = [self.pos.x - p_pos.x + screen.get_width()/2, self.pos.y - p_pos.y + screen.get_height()/2, self.width, self.depth]
+      render_pos = [self.pos.x - p_pos.x + screen.get_width()/2, self.pos.y  + screen.get_height()/2, self.width, self.depth]
       screen.blit(self.top_surf, render_pos)
     if camera_view == 'side':
       render_pos = [self.pos.x - p_pos.x + screen.get_width()/2, -self.pos.z, self.width, self.height]

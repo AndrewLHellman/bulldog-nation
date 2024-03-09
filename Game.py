@@ -41,5 +41,7 @@ class Game:
         if (self.player.side_rect.colliderect(object.side_rect)):
           object.side_surf.fill((0, 255, 0))
           #print("Boom!")
+          pass
         else:
-          object.side_surf.fill(object.color)
+          if hasattr(object, 'color'):
+            object.side_surf.fill(object.color)
