@@ -9,13 +9,18 @@ Z_ACCEL = -0.00003
 MAX_Z_VELOCITY = -3
 
 class Player:
-  def __init__(self):
+  def __init__(self, screen):
     self.position = Vector3(0,0,-100)
     self.z_velocity = 0
-    self.topSurf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
-    self.topSurf.fill((255, 0, 0))
-    self.sideSurf = pygame.image.load('./Game Jam Sprites/PlayerSideViewSprite1.png').convert()
-    self.sideSurf.set_colorkey((0, 0, 0))
+    self.top_surf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
+    self.top_surf.fill((255, 0, 0))
+    self.side_surf = pygame.image.load('./Game Jam Sprites/PlayerSideViewSprite1.png').convert()
+    self.side_surf.set_colorkey((0, 0, 0))
+    self.top_rect = self.top_surf.get_rect(center=(self.position.x, self.position.y))
+    self.side_rect = self.side_surf.get_rect(center=(self.position.x, self.position.z))
+    self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
+    # self.top_render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE]
+    # self.side_render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z, PLAYER_SIZE, PLAYER_SIZE]
 
 
   # Args = direction
@@ -23,7 +28,7 @@ class Player:
     vec.normalize(MOVE_SPEED)
     self.position.add(vec)
 
-  def update(self, keys, camera_view):
+  def update(self, keys, camera_view, screen):
     self.handleKeys(keys, camera_view)
     # print(self.position.z)
     if self.position.z > -100:
@@ -35,7 +40,9 @@ class Player:
       # exit(0)
     else:
       self.z_velocity = 0
-
+    self.top_rect.update((self.position.x - (self.top_rect.width)/2, self.position.y - self.top_rect.height/2), (self.top_rect.width, self.top_rect.height))
+    self.side_rect.update((self.position.x - (self.side_rect.width)/2, self.position.z - self.side_rect.height/2), (self.side_rect.width, self.side_rect.height))
+    self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
 
 
   def handleKeys(self, keys, camera_view):
@@ -56,9 +63,8 @@ class Player:
 
   def render(self, screen, camera_view):
     if camera_view == 'top':
-      render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE]
-      screen.blit(self.topSurf, render_pos)
+      screen.blit(self.top_surf, [self.render_pos.x, self.render_pos.y, PLAYER_SIZE, PLAYER_SIZE])
     else:
-      render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z, PLAYER_SIZE, PLAYER_SIZE]
-      screen.blit(self.sideSurf, render_pos)
+      screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
+      print(self.position.x, self.position.z)
     

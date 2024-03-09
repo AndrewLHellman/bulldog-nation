@@ -5,7 +5,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode([500, 500])
     running = True
-    game = Game()
+    game = Game(screen)
 
     while (running):
         for event in pygame.event.get():
@@ -14,8 +14,9 @@ def main():
 
         screen.fill((255, 255, 255))
         keys = pygame.key.get_pressed()
-        game.update(keys)
+        game.update(keys, screen)
         # pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+        game.detectPlayerCollision()
         game.render(screen)
 
         pygame.display.flip()
