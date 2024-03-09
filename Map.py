@@ -6,7 +6,7 @@ class Map:
   def __init__(self):
     self.objects = []
     self.objects.append(PlatformerGroundObject())
-    self.objects.append(BoxObject(Vector3(-200, 200, 200), 100, 75, 50))
+    self.objects.append(BoxObject(Vector3(0, 0, 0), 100, 100, 100))
 
   def render(self, screen, camera_view, p_pos):
     for object in self.objects:
