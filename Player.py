@@ -12,6 +12,10 @@ class Player:
   def __init__(self):
     self.position = Vector3(0,0,-100)
     self.z_velocity = 0
+    self.topSurf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
+    self.topSurf.fill((255, 0, 0))
+    self.sideSurf = pygame.image.load('./Game Jam Sprites/PlayerSideViewSprite1.png').convert()
+    self.sideSurf.set_colorkey((0, 0, 0))
 
 
   # Args = direction
@@ -52,7 +56,9 @@ class Player:
 
   def render(self, screen, camera_view):
     if camera_view == 'top':
-      pygame.draw.rect(screen, (255, 0, 0), [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE])
+      render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE]
+      screen.blit(self.topSurf, render_pos)
     else:
-      pygame.draw.rect(screen, (255, 0, 0), [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z, PLAYER_SIZE, PLAYER_SIZE])
+      render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z, PLAYER_SIZE, PLAYER_SIZE]
+      screen.blit(self.sideSurf, render_pos)
     
