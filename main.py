@@ -14,7 +14,7 @@ def main():
 
         screen.fill((255, 255, 255))
         keys = pygame.key.get_pressed()
-        game.handleKeys(keys)
+        game.update(keys)
         # pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
         game.render(screen)
 

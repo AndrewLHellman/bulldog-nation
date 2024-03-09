@@ -17,8 +17,11 @@ class Game:
   def toggleCameraView(self):
     self.camera_view = 'side' if self.camera_view == 'top' else 'top'
 
+  def update(self, keys):
+    self.handleKeys(keys)
+    self.player.update(keys, self.camera_view)
+
   def handleKeys(self, keys):
-    self.player.handleKeys(keys, self.camera_view)
     if keys[pygame.K_TAB] and time() - self.tab_last_pressed > 0.5:
       self.tab_last_pressed = time()
       self.toggleCameraView()
