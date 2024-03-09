@@ -6,6 +6,7 @@ def main():
     screen = pygame.display.set_mode([1920, 1080])
     running = True
     game = Game(screen)
+    clock = pygame.time.Clock()
 
     while (running):
         for event in pygame.event.get():
@@ -20,6 +21,8 @@ def main():
         game.render(screen)
 
         pygame.display.flip()
+
+    clock.tick(1000/60)
 
     pygame.quit()
 
