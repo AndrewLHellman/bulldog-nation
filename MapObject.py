@@ -1,3 +1,3 @@
 class MapObject:
-  def render(self, screen, px, py):
+  def render(self, screen, player):
     pass

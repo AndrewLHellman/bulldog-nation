@@ -1,5 +1,6 @@
 import pygame
 from math import sqrt
+from Vector3 import Vector3
 
 MOVE_SPEED = 0.05
 SQRT_2 = sqrt(2)
@@ -7,24 +8,17 @@ PLAYER_SIZE = 64
 
 class Player:
   def __init__(self):
-    self.x = 0
-    self.y = 0
+    self.position = Vector3(0,0,0)
 
 
   # Args = direction
-  def move(self, dx, dy):
-    if dx != 0 and dy != 0:
-      dx *= MOVE_SPEED / SQRT_2
-      dy *= MOVE_SPEED / SQRT_2
-    else:
-      dx *= MOVE_SPEED
-      dy *= MOVE_SPEED
-    self.x += dx
-    self.y += dy
+  def move(self, vec):
+    vec.normalize(MOVE_SPEED)
+    self.position.add(vec)
 
-  def handleKeys(self, keys):
+  def handleKeys(self, keys, camera_view):
     dx = 0
-    dy = 0
+    dy = 0 # y is the non-x direction here
     if keys[pygame.K_w]:
       dy = -1
     elif keys[pygame.K_s]:
@@ -33,8 +27,14 @@ class Player:
       dx = 1
     elif keys[pygame.K_a]:
       dx = -1
-    self.move(dx, dy)
+    if camera_view == 'top':
+      self.move(Vector3(dx, dy, 0))
+    else:
+      self.move(Vector3(dx, 0, dy))
 
-  def render(self, screen):
-    pygame.draw.rect(screen, (255, 0, 0), [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE])
+  def render(self, screen, camera_view):
+    if camera_view == 'top':
+      pygame.draw.rect(screen, (255, 0, 0), [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE])
+    else:
+      pygame.draw.rect(screen, (255, 0, 0), [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 + self.position.z, PLAYER_SIZE, PLAYER_SIZE])
     
