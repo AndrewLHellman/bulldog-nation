@@ -91,7 +91,7 @@ class Player:
 
   def render(self, screen, camera_view):
     if camera_view == 'top':
-      screen.blit(self.top_surf, [self.render_pos.x, self.render_pos.y, PLAYER_SIZE, PLAYER_SIZE])
+      screen.blit(self.top_surf, [self.render_pos.x, self.render_pos.y + self.position.y, PLAYER_SIZE, PLAYER_SIZE])
     else:
       screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
       print(self.position.x, self.position.z)
