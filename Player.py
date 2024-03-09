@@ -61,7 +61,7 @@ class Player:
       self.z_velocity = 0
     self.position.z = min(self.position.z, 200)
     # print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
-    self.top_rect.update((self.position.x - (self.top_rect.width)/2, self.position.y - self.top_rect.height/2), (self.top_rect.width, self.top_rect.height))
+    self.top_rect.update((self.position.x, self.position.y), (self.top_rect.width, self.top_rect.height))
     self.side_rect.update((self.position.x, self.position.z), (self.side_rect.width, self.side_rect.height))
     self.render_pos = Vector3(screen.get_width()/2, screen.get_height()/2 + self.position.y, screen.get_height()/2 + self.position.z)
     if self.facing_lr == 'Right':
