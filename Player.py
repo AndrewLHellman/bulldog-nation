@@ -6,7 +6,7 @@ MOVE_SPEED = 1
 THRUST_SPEED = 1.5
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 64
-Z_ACCEL = -0.003
+Z_ACCEL = -0.0003
 MAX_Z_VELOCITY = -5
 
 pygame.font.init()
@@ -61,7 +61,7 @@ class Player:
     self.position.z = max(self.position.z, -200)
     print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
     self.top_rect.update((self.position.x - (self.top_rect.width)/2, self.position.y - self.top_rect.height/2), (self.top_rect.width, self.top_rect.height))
-    self.side_rect.update((self.position.x - (self.side_rect.width)/2, self.position.z - self.side_rect.height/2), (self.side_rect.width, self.side_rect.height))
+    self.side_rect.update((self.position.x - (self.side_rect.width)/2, self.position.z - self.side_rect.height/2 - self.side_surf.get_height()*1.3), (self.side_rect.width, self.side_rect.height))
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
     self.side_surf = self.img[self.facing_lr]
 
@@ -91,7 +91,7 @@ class Player:
 
   def render(self, screen, camera_view):
     if camera_view == 'top':
-      screen.blit(self.top_surf, [self.render_pos.x, self.render_pos.y + self.position.y, PLAYER_SIZE, PLAYER_SIZE])
+      screen.blit(self.top_surf, [self.render_pos.x, self.render_pos.y, PLAYER_SIZE, PLAYER_SIZE])
     else:
       screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
       print(self.position.x, self.position.z)
