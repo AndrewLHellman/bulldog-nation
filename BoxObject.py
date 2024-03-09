@@ -8,12 +8,12 @@ class BoxObject(MapObject):
     self.width = width
     self.depth = depth
     self.height = height
-    self.topSurf = pygame.surface.Surface((width, depth))
-    self.topSurf.fill((0, 0, 255))
-    self.sideSurf = pygame.surface.Surface((width, height))
-    self.sideSurf.fill((0, 0, 255))
-    self.topRect = self.topSurf.get_rect(center=(self.pos.x+self.width/2, self.pos.y + self.depth/2))
-    self.sideRect = self.sideSurf.get_rect(center=(self.pos.x, self.pos.z))
+    self.top_surf = pygame.surface.Surface((width, depth))
+    self.top_surf.fill((0, 0, 255))
+    self.side_surf = pygame.surface.Surface((width, height))
+    self.side_surf.fill((0, 0, 255))
+    self.top_rect = self.top_surf.get_rect(center=(self.pos.x+self.width/2, self.pos.y + self.depth/2))
+    self.side_rect = self.side_surf.get_rect(center=(self.pos.x, self.pos.z))
 
   def render(self, screen, camera_view, p_pos):
     if camera_view == 'top':
