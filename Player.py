@@ -2,7 +2,7 @@ import pygame
 from math import sqrt
 from Vector3 import Vector3
 
-MOVE_SPEED = 0.1
+MOVE_SPEED = 1
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 64
 Z_ACCEL = -0.00003
