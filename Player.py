@@ -14,7 +14,7 @@ my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 class Player:
   def __init__(self, screen):
-    self.position = Vector3(0,0, -200)
+    self.position = Vector3(0,0, 200)
     self.z_velocity = 0
     self.top_surf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
     self.top_surf.fill((255, 0, 0))
