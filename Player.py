@@ -6,7 +6,7 @@ MOVE_SPEED = 1
 THRUST_SPEED = 1.5
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 64
-Z_ACCEL = -0.0003
+Z_ACCEL = -0.003
 MAX_Z_VELOCITY = -5
 
 pygame.font.init()
