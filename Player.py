@@ -3,11 +3,11 @@ from math import sqrt
 from Vector3 import Vector3
 
 MOVE_SPEED = 1
-THRUST_SPEED = 2
+THRUST_SPEED = 1.5
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 64
-Z_ACCEL = -0.002
-MAX_Z_VELOCITY = -3
+Z_ACCEL = -0.003
+MAX_Z_VELOCITY = -5
 
 pygame.font.init()
 my_font = pygame.font.SysFont('Comic Sans MS', 30)
@@ -20,6 +20,7 @@ class Player:
     self.top_surf.fill((255, 0, 0))
     self.img = {}
     self.index = 0
+    self.is_jump_pressed = False
     scale = 1
     img = pygame.image.load('./source/sprites/playerSideRight.png').convert()
     img.set_colorkey((0,0,0))
@@ -39,7 +40,11 @@ class Player:
   # Args = direction
   def move(self, vec):
     vec.normalize_xy(MOVE_SPEED)
-    vec.z *= THRUST_SPEED
+    if self.is_jump_pressed or self.position.z < -199:
+      self.is_jump_pressed = True
+      vec.z *= THRUST_SPEED
+    else:
+      vec.z = 0
     self.position.add(vec)
 
   def update(self, keys, camera_view, screen):
@@ -77,7 +82,12 @@ class Player:
     if camera_view == 'top':
       self.move(Vector3(dx, dy, 0))
     else:
-      self.move(Vector3(dx, 0, -dy))
+      jump = 0
+      if keys[pygame.K_w]:
+        jump = 1
+      else:
+        self.is_jump_pressed = False
+      self.move(Vector3(dx, 0, jump))
 
   def render(self, screen, camera_view):
     if camera_view == 'top':
