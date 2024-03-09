@@ -31,9 +31,11 @@ class Game:
       for object in self.map.objects:
         if (self.player.top_rect.colliderect(object.topRect)):
           object.topSurf.fill((0, 255, 0))
-          print("Boom!")
-    if (self.camera_view == 'side'):
+        else:
+          object.topSurf.fill((0, 0, 255))
+          #print("Boom!")
+    elif (self.camera_view == 'side'):
       for object in self.map.objects:
         if (self.player.side_rect.colliderect(object.sideRect)):
           object.sideSurf.fill((0, 255, 0))
-          print("Boom!")
+          #print("Boom!")

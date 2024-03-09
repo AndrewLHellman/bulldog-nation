@@ -16,7 +16,7 @@ class Player:
     self.top_surf.fill((255, 0, 0))
     self.side_surf = pygame.image.load('./Game Jam Sprites/PlayerSideViewSprite1.png').convert()
     self.side_surf.set_colorkey((0, 0, 0))
-    self.top_rect = self.top_surf.get_rect(center=(self.position.x, self.position.y))
+    self.top_rect = self.top_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.y + PLAYER_SIZE/2))
     self.side_rect = self.side_surf.get_rect(center=(self.position.x, self.position.z))
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
     # self.top_render_pos = [screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE]
@@ -40,6 +40,7 @@ class Player:
       # exit(0)
     else:
       self.z_velocity = 0
+    print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
     self.top_rect.update((self.position.x - (self.top_rect.width)/2, self.position.y - self.top_rect.height/2), (self.top_rect.width, self.top_rect.height))
     self.side_rect.update((self.position.x - (self.side_rect.width)/2, self.position.z - self.side_rect.height/2), (self.side_rect.width, self.side_rect.height))
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
