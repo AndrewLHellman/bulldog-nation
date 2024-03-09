@@ -26,7 +26,7 @@ class Player:
     for i in range(6):
       img = pygame.image.load(f'./source/sprites/PlayerWalkingRight-{i}.png').convert()
       img.set_colorkey((0,0,0))
-      self.img['Right'].append(pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale))))
+      self.img['Right'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
     img = pygame.image.load('./source/sprites/playerSideLeft.png').convert()
     img.set_colorkey((0,0,0))
     self.img['Left'] = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
