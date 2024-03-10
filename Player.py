@@ -20,21 +20,21 @@ class Player:
     self.top_img = {}
     self.side_img = {}
     for dir in ['North', 'South', 'East', 'West']:
-      img = pygame.image.load(f'./source/sprites/PlayerRobotTop{dir}.png')
+      img = pygame.image.load(f'source/sprites/PlayerRobotTop{dir}.png')
       self.side_img[dir] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     self.index = 0
     self.is_jump_pressed = False
     for dir in ['Right', 'Left']:
       self.side_img[dir] = {}
-      img = pygame.image.load(f'./source/sprites/PlayerRobotSide{dir}.png')
+      img = pygame.image.load(f'source/sprites/PlayerRobotSide{dir}.png')
       self.side_img[dir]['no-jump'] = []
       self.side_img[dir]['jump'] = []
       self.side_img[dir]['no-jump'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
       for i in range(2):
-        img = pygame.image.load(f'./source/sprites/PlayerRobotSideJumping{dir}{i}.png')
+        img = pygame.image.load(f'source/sprites/PlayerRobotSideJumping{dir}{i}.png')
         self.side_img[dir]['jump'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
     # for i in range(6):
-    #   img = pygame.image.load(f'./source/sprites/PlayerWalkingRight-{i}.png').convert()
+    #   img = pygame.image.load(f'source/sprites/PlayerWalkingRight-{i}.png').convert()
     #   img.set_colorkey((0,0,0))
     #   self.img['Right'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
     self.facing_lr = 'Right'

@@ -4,12 +4,12 @@ from Game import Game
 def main():
     pygame.init()
     pygame.display.set_caption("Trip to Mars")
-    pygame.display.set_icon(pygame.image.load('./source/sprites/AlienIcon.png'))
+    pygame.display.set_icon(pygame.image.load('source/sprites/AlienIcon.png'))
     screen = pygame.display.set_mode([1920, 1080])
     running = True
     game = Game(screen)
     clock = pygame.time.Clock()
-    background_img = pygame.image.load('./source/sprites/Background.png').convert()
+    background_img = pygame.image.load('source/sprites/Background.png').convert()
     background_img = pygame.transform.scale(background_img, (screen.get_width(), screen.get_height()))
     background_rect = background_img.get_rect()
     font = pygame.font.SysFont('sourcecodepro', 30)
@@ -43,9 +43,10 @@ def main():
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-        background_img = pygame.image.load('./source/sprites/WinPage.png').convert()
+        background_img = pygame.image.load('source/sprites/WinPage.png').convert()
         background_img = pygame.transform.scale(background_img, (screen.get_width(), screen.get_height()))
-        screen.blit(background_img, background_rect)
+        if running:
+            screen.blit(background_img, background_rect)
 
         keys = pygame.key.get_pressed()
         pygame.display.flip()

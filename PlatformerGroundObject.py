@@ -10,13 +10,13 @@ class PlatformerGroundObject(MapObject):
     self.depth = 256
     self.height = 500
     self.top_surf = pygame.surface.Surface((self.width, self.depth))
-    img = pygame.image.load(f'./source/sprites/TopDownFloor-{floortexture}.png').convert_alpha()
+    img = pygame.image.load(f'source/sprites/TopDownFloor-{floortexture}.png').convert_alpha()
     self.top_surf.blit(pygame.transform.scale(img, (self.width, self.depth)), (0 , 0))
     #self.top_surf.fill(self.color)
     self.side_surf = pygame.surface.Surface((self.width, self.height))
     # self.side_surf.fill(self.color)
     self.top_rect = None
-    img = pygame.image.load(f'./source/sprites/BackgroundFloor{sidetexture}.png').convert()
+    img = pygame.image.load(f'source/sprites/BackgroundFloor{sidetexture}.png').convert()
     self.side_surf.blit(pygame.transform.scale(img, (self.width, 400)), (0, 0))
     self.side_surf.set_colorkey((0,0,0))
     self.side_rect = self.side_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.z + self.height/2 + 10))
