@@ -3,6 +3,8 @@ from Game import Game
 
 def main():
     pygame.init()
+    pygame.display.set_caption("Trip to Mars")
+    pygame.display.set_icon(pygame.image.load('./source/sprites/AlienIcon.png'))
     screen = pygame.display.set_mode([1920, 1080])
     running = True
     game = Game(screen)
