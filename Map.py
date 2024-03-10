@@ -3,6 +3,7 @@ from Vector3 import Vector3
 from PlatformerGroundObject import PlatformerGroundObject
 from Player import PLAYER_SIZE
 from random import randint
+from TextObject import TextObject
 
 class Map:
   def __init__(self):
@@ -17,6 +18,10 @@ class Map:
     self.objects.append(BoxObject(Vector3(2230, -37.5, -515), Vector3(75, 75, 75), collectable=True, top_image='./source/sprites/SpecimenTop.png', side_image='./source/sprites/SpecimenSide.png'))
     self.objects.append(BoxObject(Vector3(3912.5, 37.5, 130), Vector3(75, 75, 75), collectable=True, top_image='./source/sprites/SpecimenTop.png', side_image='./source/sprites/SpecimenSide.png'))
     self.objects.append(BoxObject(Vector3(3600, -350, -600), Vector3(700, 700, 600), top_image='./source/sprites/CloudObstacleTop.png', side_image='./source/sprites/CloudObstacleSide.png'))
+    self.objects.append(TextObject(Vector3(-750, -200, -200), "Spencer's Trip to Mars"))
+    self.objects.append(TextObject(Vector3(-700, 300, 300), 'Move right to start'))
+    self.objects.append(TextObject(Vector3(1000, 0, -1000), 'Press Tab to switch cameras'))
+    self.objects.append(TextObject(Vector3(1200, -300, 20), 'Collect 5 aliens to win!'))
 
   def render(self, screen, camera_view, p_pos):
     for object in self.objects:
@@ -46,15 +51,19 @@ class Map:
   def correctPosition(self, player, camera_view):
     if (camera_view == 'side'):
       for object in self.objects:
-        if (player.side_rect.colliderect(object.side_rect)):
-          print(f"top: {object.side_rect.top}, bottom: {object.side_rect.bottom}")
+        if object.side_rect != None and (player.side_rect.colliderect(object.side_rect)):
+          # print(f"top: {object.side_rect.top}, bottom: {object.side_rect.bottom}")
           player.position.z = object.side_rect.top - PLAYER_SIZE
           #print("Boom!")
     else:
       for object in self.objects:
         if object.top_rect != None and (player.top_rect.colliderect(object.top_rect)):
-          print(f"top: {object.top_rect.top}, bottom: {object.top_rect.bottom}")
-          player.position.y = object.top_rect.top - PLAYER_SIZE
+          # print(f"top: {object.top_rect.top}, bottom: {object.top_rect.bottom}")
+          if object.top_rect.top > -500:
+            player.position.y = object.top_rect.top - PLAYER_SIZE
+          else:
+            player.position.x = object.top_rect.left - PLAYER_SIZE
+
           #print("Boom!")
     
   def fallToNearestObject(self, player, camera_view):

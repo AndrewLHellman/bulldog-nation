@@ -15,7 +15,7 @@ font = pygame.font.SysFont('sourcecodepro', 30)
 
 class Player:
   def __init__(self, screen):
-    self.position = Vector3(0,0, 200-PLAYER_SIZE)
+    self.position = Vector3(-600,0, 200-PLAYER_SIZE)
     self.z_velocity = 0
     self.top_img = {}
     self.side_img = {}
@@ -46,7 +46,7 @@ class Player:
   # vec = direction
   def move(self, vec, map, camera_view):
     vec.normalize_xy(MOVE_SPEED)
-    print(f"can fall: {self.can_fall(map, camera_view)} {self.position.x}")
+    # print(f"can fall: {self.can_fall(map, camera_view)} {self.position.x}")
     if self.is_jump_pressed or not self.can_fall(map, camera_view):
       self.is_jump_pressed = True
       vec.z *= THRUST_SPEED
