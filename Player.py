@@ -40,7 +40,7 @@ class Player:
   # vec = direction
   def move(self, vec, map, camera_view):
     vec.normalize_xy(MOVE_SPEED)
-    if self.is_jump_pressed or self.position.z > 199:
+    if self.is_jump_pressed or not self.can_fall(map, camera_view):
       self.is_jump_pressed = True
       vec.z *= THRUST_SPEED
     else:
@@ -62,10 +62,13 @@ class Player:
         self.position = Vector3(new_pos.x, new_pos.y, old_pos.z)
 
 
+  def can_fall(self, map, camera_view):
+    return self.position.z < 199 and map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 1), self, camera_view)
+
   def update(self, keys, camera_view, screen, map):
     self.handleKeys(keys, camera_view, map)
     # print(self.position.z)
-    if self.position.z < 199:
+    if self.can_fall(map, camera_view):
       self.z_velocity += Z_ACCEL
       # print(f"z velo: {self.z_velocity}")
       self.z_velocity = min(self.z_velocity, MAX_Z_VELOCITY)
