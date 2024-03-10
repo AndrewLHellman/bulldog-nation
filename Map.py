@@ -34,8 +34,8 @@ class Map:
     self.objects.append(BoxObject(Vector3(5900,-100,-1000), Vector3(200, 1, 0)))
     self.objects.append(BoxObject(Vector3(6100,-300,-1000), Vector3(1, 200, 0)))
 
-    self.objects.append(TextObject(Vector3(-750, -200, -200), "Trip to Mars"))
-    self.objects.append(TextObject(Vector3(-720, 300, 300), 'Move right to start'))
+    self.objects.append(TextObject(Vector3(-700, -200, -200), "Trip to Mars"))
+    self.objects.append(TextObject(Vector3(-755, 300, 300), 'Move right to start'))
     self.objects.append(TextObject(Vector3(1000, 200, -1000), 'Press Tab to switch cameras'))
     self.objects.append(TextObject(Vector3(1200, -300, 20), 'Collect 4 aliens to win!'))
 
