@@ -18,7 +18,7 @@ class PlatformerGroundObject(MapObject):
     self.top_rect = None
     img = pygame.image.load('./source/sprites/BackgroundFloorUpdated-1.png').convert()
     self.side_surf.blit(pygame.transform.scale(img, (self.width, 300)), (0, 0))
-    self.side_rect = self.side_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.z + self.height/2))
+    self.side_rect = self.side_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.z + self.height/2 + 10))
 
   def render(self, screen, camera_view, p_pos):
     if camera_view == 'top':

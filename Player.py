@@ -14,7 +14,7 @@ my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 class Player:
   def __init__(self, screen):
-    self.position = Vector3(0,0, 0)
+    self.position = Vector3(0,0, 200-PLAYER_SIZE)
     self.z_velocity = 0
     self.top_surf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
     self.top_surf.fill((255, 0, 0))
@@ -65,7 +65,7 @@ class Player:
 
 
   def can_fall(self, map, camera_view):
-    return map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 1), self, camera_view)
+    return map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 3), self, camera_view)
 
   def update(self, keys, camera_view, screen, map):
     self.handleKeys(keys, camera_view, map)
@@ -81,7 +81,7 @@ class Player:
       # exit(0)
     else:
       self.z_velocity = 0
-    # self.position.z = min(self.position.z, 200)
+    self.position.z = min(self.position.z, 200 - PLAYER_SIZE + 10)
     # print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
     self.top_rect.update((self.position.x, self.position.y), (self.top_rect.width, self.top_rect.height))
     self.side_rect.update((self.position.x, self.position.z), (self.side_rect.width, self.side_rect.height))
