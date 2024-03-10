@@ -47,8 +47,6 @@ class Player:
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 + self.position.y, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
     self.score = 0
 
-
-
   # vec = direction
   def move(self, vec, map, camera_view):
     vec.normalize_xy(MOVE_SPEED)

@@ -28,6 +28,8 @@ class Map:
       object.render(screen, camera_view, p_pos)
 
   def canPlayerMoveToPosition(self, pos, player, camera_view):
+    if pos.x < -1000:
+      return False
     if camera_view == 'top':
       top_rect = player.top_surf.get_rect(center=(pos.x + PLAYER_SIZE/2, pos.y + PLAYER_SIZE/2))
       for object in self.objects:
