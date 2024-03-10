@@ -26,10 +26,11 @@ class PlatformerGroundObject(MapObject):
       render_pos = [self.pos.x - p_pos.x + screen.get_width()/2, self.pos.y  + screen.get_height()/2, self.width, self.depth]
       screen.blit(self.top_surf, render_pos)
     else:
-      render_pos = [self.pos.x - p_pos.x + screen.get_width()/2, screen.get_height()/2 + self.pos.z, self.width, self.height]
-      # pygame.draw.rect(screen, (0, 0, 255), [self.pos.x - p_pos.x, self.pos.z, self.width, self.height])
-      screen.blit(self.side_surf, render_pos)
-      # print(self.pos.x, self.pos.z)
+      if self.pos.y < -600:
+        render_pos = [self.pos.x - p_pos.x + screen.get_width()/2, screen.get_height()/2 + self.pos.z, self.width, self.height]
+        # pygame.draw.rect(screen, (0, 0, 255), [self.pos.x - p_pos.x, self.pos.z, self.width, self.height])
+        screen.blit(self.side_surf, render_pos)
+        # print(self.pos.x, self.pos.z)
 
   def hasTopView(self):
     return False

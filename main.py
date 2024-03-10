@@ -10,6 +10,7 @@ def main():
     background_img = pygame.image.load('./source/sprites/Background.png').convert()
     background_img = pygame.transform.scale(background_img, (screen.get_width(), screen.get_height()))
     background_rect = background_img.get_rect()
+    font = pygame.font.SysFont('sourcecodepro', 30)
 
     while (running):
         for event in pygame.event.get():
@@ -22,7 +23,7 @@ def main():
         game.update(keys, screen)
         # pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
         game.render(screen)
-
+        screen.blit(font.render("%d" % clock.get_fps(), False, (0, 0, 0)), (1800, 0))
         pygame.display.flip()
         
         clock.tick(60)
