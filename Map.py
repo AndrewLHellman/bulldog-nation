@@ -37,7 +37,7 @@ class Map:
     self.objects.append(TextObject(Vector3(-750, -200, -200), "Trip to Mars"))
     self.objects.append(TextObject(Vector3(-720, 300, 300), 'Move right to start'))
     self.objects.append(TextObject(Vector3(1000, 200, -1000), 'Press Tab to switch cameras'))
-    self.objects.append(TextObject(Vector3(1200, -300, 20), 'Collect 5 aliens to win!'))
+    self.objects.append(TextObject(Vector3(1200, -300, 20), 'Collect 4 aliens to win!'))
 
   def render(self, screen, camera_view, p_pos):
     for object in self.objects:
