@@ -7,7 +7,7 @@ def main():
     running = True
     game = Game(screen)
     clock = pygame.time.Clock()
-    background_img = pygame.image.load('./source/sprites/BackgroundNew.png').convert()
+    background_img = pygame.image.load('./source/sprites/Background.png').convert()
     background_img = pygame.transform.scale(background_img, (screen.get_width(), screen.get_height()))
     background_rect = background_img.get_rect()
 
