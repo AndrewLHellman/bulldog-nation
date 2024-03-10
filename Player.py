@@ -2,15 +2,16 @@ import pygame
 from math import sqrt
 from Vector3 import Vector3
 
-MOVE_SPEED = 1
+MOVE_SPEED = 5
 THRUST_SPEED = -1.5
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 96
-Z_ACCEL = 0.003
+Z_ACCEL = 0.005
 MAX_Z_VELOCITY = 5
 
 pygame.font.init()
-my_font = pygame.font.SysFont('Comic Sans MS', 30)
+print(pygame.font.get_fonts())
+font = pygame.font.SysFont('sourcecodepro', 30)
 
 class Player:
   def __init__(self, screen):
@@ -139,6 +140,6 @@ class Player:
     else:
       screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
       # print(self.position.x, self.position.z)
-    text_surface = my_font.render("(%.2f, %.2f, %.2f)" % (self.position.x, self.position.y, self.position.z), False, (0, 0, 0))
+    text_surface = font.render("(%.2f, %.2f, %.2f)" % (self.position.x, self.position.y, self.position.z), False, (0, 0, 0))
     screen.blit(text_surface, (0,0))
     
