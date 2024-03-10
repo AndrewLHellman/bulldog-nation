@@ -6,8 +6,9 @@ from Player import PLAYER_SIZE
 class Map:
   def __init__(self):
     self.objects = []
-    for i in range(-5000, 5001, 2000):
-      self.objects.append(PlatformerGroundObject(-i))
+    for i in range(-5000, 5001, 256):
+      for j in range(-700, 700, 256):
+        self.objects.append(PlatformerGroundObject(-i, j))
     self.objects.append(BoxObject(Vector3(100, 100, 0), 100, 100, 100))
 
   def render(self, screen, camera_view, p_pos):

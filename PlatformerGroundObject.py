@@ -1,21 +1,22 @@
 import pygame
 from MapObject import MapObject
 from Vector3 import Vector3
+from random import randint
 
 class PlatformerGroundObject(MapObject):
-  def __init__(self, x):
-    self.pos = Vector3(x ,-600,-800)
-    self.width = 2000
-    self.depth = 1200
+  def __init__(self, x, y):
+    self.pos = Vector3(x , y,-800)
+    self.width = 256
+    self.depth = 256
     self.height = 500
     self.top_surf = pygame.surface.Surface((self.width, self.depth))
-    img = pygame.image.load('./source/sprites/FloorTile-1.png').convert()
+    img = pygame.image.load(f'./source/sprites/TopDownFloor-{min(randint(1, 5), 3)}.png').convert()
     self.top_surf.blit(pygame.transform.scale(img, (self.width, self.depth)), (0 , 0))
     #self.top_surf.fill(self.color)
     self.side_surf = pygame.surface.Surface((self.width, self.height))
     # self.side_surf.fill(self.color)
     self.top_rect = None
-    img = pygame.image.load('./source/sprites/BackgroundFloorUpdated.png').convert()
+    img = pygame.image.load('./source/sprites/BackgroundFloorUpdated-1.png').convert()
     self.side_surf.blit(pygame.transform.scale(img, (self.width, 300)), (0, 0))
     self.side_rect = self.side_surf.get_rect(center=(self.pos.x, self.pos.z))
 
