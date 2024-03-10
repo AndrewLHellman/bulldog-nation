@@ -25,16 +25,23 @@ class Player:
     self.index = 0
     self.is_jump_pressed = False
     for dir in ['Right', 'Left']:
+      self.side_img[dir] = {}
       img = pygame.image.load(f'./source/sprites/PlayerRobotSide{dir}.png')
-      self.side_img[dir] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
+      self.side_img[dir]['no-jump'] = []
+      self.side_img[dir]['jump'] = []
+      self.side_img[dir]['no-jump'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
+      for i in range(2):
+        img = pygame.image.load(f'./source/sprites/PlayerRobotSideJumping{dir}{i}.png')
+        self.side_img[dir]['jump'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
     # for i in range(6):
     #   img = pygame.image.load(f'./source/sprites/PlayerWalkingRight-{i}.png').convert()
     #   img.set_colorkey((0,0,0))
     #   self.img['Right'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
     self.facing_lr = 'Right'
     self.facing_nsew = 'East'
+    self.jumping = 'no-jump'
     self.top_surf = self.side_img[self.facing_nsew]
-    self.side_surf = self.side_img[self.facing_lr]
+    self.side_surf = self.side_img[self.facing_lr]['no-jump'][0]
     self.top_rect = self.top_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.y + PLAYER_SIZE/2))
     self.side_rect = self.side_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.z + PLAYER_SIZE/2))
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 + self.position.y, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
@@ -48,6 +55,7 @@ class Player:
     # print(f"can fall: {self.can_fall(map, camera_view)} {self.position.x}")
     if self.is_jump_pressed or not self.can_fall(map, camera_view):
       self.is_jump_pressed = True
+      self.index = (self.index + 1) % (len(self.side_img[self.facing_lr]['jump']) * 10)
       vec.z *= THRUST_SPEED
     else:
       vec.z = 0
@@ -102,7 +110,10 @@ class Player:
       
     # else:
     self.top_surf = self.side_img[self.facing_nsew]
-    self.side_surf = self.side_img[self.facing_lr]
+    if self.is_jump_pressed:
+      self.side_surf = self.side_img[self.facing_lr]['jump'][self.index // (len(self.side_img[self.facing_lr]['jump']) * 5)]
+    else:
+      self.side_surf = self.side_img[self.facing_lr]['no-jump'][0]
 
 
   def handleKeys(self, keys, camera_view, map):
