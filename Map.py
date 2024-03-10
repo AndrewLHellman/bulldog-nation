@@ -12,7 +12,8 @@ class Map:
         self.objects.append(PlatformerGroundObject(i, j, min(randint(1, 5), 3)))
     for i in range(-700, 700, 250):
       self.objects.append(PlatformerGroundObject(750, i, randint(4, 5)))
-    self.objects.append(BoxObject(Vector3(100, 100, 0), 100, 200, 50))
+    self.objects.append(BoxObject(Vector3(100, 100, 0), Vector3(100, 200, 50), (0, 0, 255)))
+    self.objects.append(BoxObject(Vector3(750, -700, 150), Vector3(250, 1400, 50), (255, 255, 255, 0), True))
 
   def render(self, screen, camera_view, p_pos):
     for object in self.objects:

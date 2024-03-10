@@ -3,16 +3,19 @@ from MapObject import MapObject
 
 
 class BoxObject(MapObject):
-  def __init__(self, pos, width, depth, height):
+  def __init__(self, pos, dims, color, transparent = False):
     self.pos = pos
-    self.width = width
-    self.depth = depth
-    self.height = height
-    self.top_surf = pygame.surface.Surface((width, depth))
-    self.color = (0, 0, 255)
+    self.width = dims.x
+    self.depth = dims.y
+    self.height = dims.z
+    self.top_surf = pygame.surface.Surface((self.width, self.depth))
+    self.color = (color)
     self.top_surf.fill(self.color)
-    self.side_surf = pygame.surface.Surface((width, height))
+    self.side_surf = pygame.surface.Surface((self.width, self.height))
     self.side_surf.fill(self.color)
+    if transparent:
+      self.side_surf.set_colorkey(color)
+      self.top_surf.set_colorkey(color)
     self.top_rect = self.top_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.y + self.depth/2))
     self.side_rect = self.side_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.z + self.height/2))
 
