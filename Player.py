@@ -3,14 +3,14 @@ from math import sqrt
 from Vector3 import Vector3
 
 MOVE_SPEED = 5
-THRUST_SPEED = -7.5
+THRUST_SPEED = -5
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 96
-Z_ACCEL = 0.015
-MAX_Z_VELOCITY = 25
+Z_ACCEL = 0.05
+MAX_Z_VELOCITY = 15
 
 pygame.font.init()
-print(pygame.font.get_fonts())
+# print(pygame.font.get_fonts())
 font = pygame.font.SysFont('sourcecodepro', 30)
 
 class Player:
@@ -45,6 +45,7 @@ class Player:
   # vec = direction
   def move(self, vec, map, camera_view):
     vec.normalize_xy(MOVE_SPEED)
+    print(f"can fall: {self.can_fall(map, camera_view)} {self.position.x}")
     if self.is_jump_pressed or not self.can_fall(map, camera_view):
       self.is_jump_pressed = True
       vec.z *= THRUST_SPEED
@@ -75,7 +76,7 @@ class Player:
 
 
   def can_fall(self, map, camera_view):
-    return map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 3), self, camera_view)
+    return self.position.z <= (200 - PLAYER_SIZE) and map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 3), self, camera_view)
 
   def update(self, keys, camera_view, screen, map):
     self.handleKeys(keys, camera_view, map)
@@ -91,7 +92,7 @@ class Player:
       # exit(0)
     else:
       self.z_velocity = 0
-    self.position.z = min(self.position.z, 200 - PLAYER_SIZE + 10)
+    self.position.z = min(self.position.z, 200) # sanity check
     # print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
     self.top_rect.update((self.position.x, self.position.y), (self.top_rect.width, self.top_rect.height))
     self.side_rect.update((self.position.x, self.position.z), (self.side_rect.width, self.side_rect.height))

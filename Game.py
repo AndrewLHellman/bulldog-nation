@@ -25,6 +25,8 @@ class Game:
   def update(self, keys, screen):
     self.handleKeys(keys)
     self.player.update(keys, self.camera_view, screen, self.map)
+    if self.camera_view == 'side':
+      self.map.correctPosition(self.player, self.camera_view)
 
   def handleKeys(self, keys):
     if keys[pygame.K_TAB] and time() - self.tab_last_pressed > 0.5:
