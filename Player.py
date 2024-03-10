@@ -51,7 +51,7 @@ class Player:
   def move(self, vec, map, camera_view):
     vec.normalize_xy(MOVE_SPEED)
     # print(f"can fall: {self.can_fall(map, camera_view)} {self.position.x}")
-    if self.is_jump_pressed or not self.can_fall(map, camera_view):
+    if self.is_jump_pressed or self.can_jump(map, camera_view):
       self.is_jump_pressed = True
       if vec.z != 0:
         self.index = (self.index + 1) % (len(self.side_img[self.facing_lr]['jump']) * 10)
@@ -86,6 +86,12 @@ class Player:
 
   def can_fall(self, map, camera_view):
     return self.position.z <= (200 - PLAYER_SIZE) and map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 3), self, camera_view)
+
+  def can_jump(self, map, camera_view):
+    print(f"can fall: {map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 3), self, camera_view)}")
+    print(f"p: ({self.position.x},{self.position.y},{self.position.z})")
+    return self.position.z > (200 - PLAYER_SIZE) or not map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 15), self, camera_view)
+
 
   def update(self, keys, camera_view, screen, map):
     self.handleKeys(keys, camera_view, map)
