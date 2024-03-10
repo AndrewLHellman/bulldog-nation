@@ -11,25 +11,19 @@ class Game:
     self.player = Player(screen)
     self.map = Map()
     self.tab_last_pressed = 0
-    img = pygame.image.load('source/sprites/CameraOverlayTop.png')
+    img = pygame.image.load('source/sprites/CameraOverlay.png')
     img.set_colorkey((0,0,0))
-    img.set_alpha(128)
-    self.camera_surf_top = pygame.transform.scale(img, (1920, 1080))
-    img = pygame.image.load('source/sprites/CameraOverlaySide.png')
-    img.set_colorkey((0,0,0))
-    img.set_alpha(128)
-    self.camera_surf_side = pygame.transform.scale(img, (1920, 1080))
+    self.camera_surf = pygame.transform.scale(img, (1920, 1080))
   
   def render(self, screen):
     self.map.render(screen, self.camera_view, self.player.position)
     self.player.render(screen, self.camera_view)
-    if self.camera_view == 'top':
-      # screen.blit(self.camera_surf_top, (0,0))
-      text_surface = font.render("REC", False, (255, 255, 255))
-      screen.blit(text_surface, (1700,980))
-    
-      text_surface = font.render("TOP", False, (255, 255, 255))
-      screen.blit(text_surface, (200,980))
+    screen.blit(self.camera_surf, (0,0))
+    text_surface = font.render("REC", False, (255, 255, 255))
+    screen.blit(text_surface, (1720,967))
+  
+    text_surface = font.render(self.camera_view.upper(), False, (255, 255, 255))
+    screen.blit(text_surface, (100,967))
       # screen.blit()
 
 
