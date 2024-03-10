@@ -3,11 +3,11 @@ from math import sqrt
 from Vector3 import Vector3
 
 MOVE_SPEED = 5
-THRUST_SPEED = -1.5
+THRUST_SPEED = -7.5
 SQRT_2 = sqrt(2)
 PLAYER_SIZE = 96
-Z_ACCEL = 0.005
-MAX_Z_VELOCITY = 5
+Z_ACCEL = 0.015
+MAX_Z_VELOCITY = 25
 
 pygame.font.init()
 print(pygame.font.get_fonts())
