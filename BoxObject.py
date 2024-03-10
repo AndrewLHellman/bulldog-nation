@@ -15,13 +15,15 @@ class BoxObject(MapObject, pygame.sprite.Sprite):
     if not top_image:
       self.top_surf.fill(self.color)
     else:
-      img = pygame.image.load(f'{top_image}')
+      img = pygame.image.load(f'{top_image}').convert()
+      img.set_colorkey((0,0,0))
       self.top_surf = pygame.transform.scale(img, (self.width, self.depth))
     self.side_surf = pygame.surface.Surface((self.width, self.height))
     if not side_image:
       self.side_surf.fill(self.color)
     else:
-      img = pygame.image.load(f'{side_image}')
+      img = pygame.image.load(f'{side_image}').convert()
+      img.set_colorkey((0,0,0))
       self.side_surf = pygame.transform.scale(img, (self.width, self.height))
     if transparent:
       self.side_surf.set_colorkey(color)
