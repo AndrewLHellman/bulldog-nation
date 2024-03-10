@@ -22,15 +22,15 @@ class Game:
   def render(self, screen):
     self.map.render(screen, self.camera_view, self.player.position)
     self.player.render(screen, self.camera_view)
-    # screen.blit(self.camera_surf, (0,0))
-    # text_surface = font.render("REC", False, (255, 255, 255))
-    # screen.blit(text_surface, (1720,967))
+    screen.blit(self.camera_surf, (0,0))
+    text_surface = font.render("REC", False, (255, 255, 255))
+    screen.blit(text_surface, (1720,967))
   
-    # text_surface = font.render(self.camera_view.upper(), False, (255, 255, 255))
-    # screen.blit(text_surface, (100,967))
-    #   # screen.blit()
-    # for i in range(self.player.score):
-    #   screen.blit(self.alien_surf, (1830 - 64*i, 35))
+    text_surface = font.render(self.camera_view.upper(), False, (255, 255, 255))
+    screen.blit(text_surface, (100,967))
+      # screen.blit()
+    for i in range(self.player.score):
+      screen.blit(self.alien_surf, (1830 - 64*i, 35))
 
 
   def toggleCameraView(self):
