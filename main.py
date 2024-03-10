@@ -14,6 +14,9 @@ def main():
     background_rect = background_img.get_rect()
     font = pygame.font.SysFont('sourcecodepro', 30)
 
+    # Music from #Uppbeat (free for Creators!):
+    # https://uppbeat.io/t/danijel-zambo/stardust
+    # License code: OOGMCXYLXE36LVGM
     file = 'source/stardust-danijel-zambo-main-version-03-13-1372.mp3'
     pygame.init()
     pygame.mixer.init()
