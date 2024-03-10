@@ -29,6 +29,7 @@ class Map:
     self.objects.append(BoxObject(Vector3(5400,-100,-1000), Vector3(200, 1, 0), transparent=True))
     self.objects.append(BoxObject(Vector3(5600,-300,-1000), Vector3(1, 200, 0), transparent=True))
     self.objects.append(BoxObject(Vector3(5900,-300,-300), Vector3(200, 200, 200), is_walkable=True, top_image='./source/sprites/PlatformTop.png', side_image='./source/sprites/PlatformSide.png'))
+    self.objects.append(BoxObject(Vector3(5962.5, -237.5, -370), Vector3(75, 75, 75), collectable=True, top_image='./source/sprites/SpecimenTop.png', side_image='./source/sprites/SpecimenSide.png'))
     self.objects.append(BoxObject(Vector3(5900,-300,-1000), Vector3(200, 1, 0), transparent=True))
     self.objects.append(BoxObject(Vector3(5900,-300,-1000), Vector3(1, 200, 0), transparent=True))
     self.objects.append(BoxObject(Vector3(5900,-100,-1000), Vector3(200, 1, 0), transparent=True))
