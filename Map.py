@@ -41,7 +41,11 @@ class Map:
       for object in self.objects:
         if object.top_rect != None and (player.top_rect.colliderect(object.top_rect)):
           print(f"top: {object.top_rect.top}, bottom: {object.top_rect.bottom}")
-          player.position.y = object.top_rect.top - PLAYER_SIZE
+          if object.top_rect.top > -500:
+            player.position.y = object.top_rect.top - PLAYER_SIZE
+          else:
+            player.position.x = object.top_rect.left - PLAYER_SIZE
+
           #print("Boom!")
     
   def fallToNearestObject(self, player, camera_view):
