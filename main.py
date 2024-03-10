@@ -14,6 +14,13 @@ def main():
     background_rect = background_img.get_rect()
     font = pygame.font.SysFont('sourcecodepro', 30)
 
+    file = 'source/stardust-danijel-zambo-main-version-03-13-1372.mp3'
+    pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load(file)
+    pygame.mixer.music.play(-1)
+
+
     while (running):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
