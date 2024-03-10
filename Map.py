@@ -20,23 +20,13 @@ class Map:
       top_rect = player.top_surf.get_rect(center=(pos.x + PLAYER_SIZE/2, pos.y + PLAYER_SIZE/2))
       for object in self.objects:
         if object.top_rect != None and (top_rect.colliderect(object.top_rect)):
-          # print(f'Collision with {object}!')
-          # print(f"Player rect: {top_rect.topleft}, {top_rect.bottomright}")
-          # print(f"Object rect: {object.top_rect.topleft}, {object.top_rect.bottomright}")
           return False
-      # print("no coll")
-      return True
     else:
-      side_rect = player.top_surf.get_rect(center=(pos.x + PLAYER_SIZE/2, pos.z + PLAYER_SIZE/2))
+      side_rect = player.side_surf.get_rect(center=(pos.x + PLAYER_SIZE/2, pos.z + PLAYER_SIZE/2))
       for object in self.objects:
         if object.side_rect != None and (side_rect.colliderect(object.side_rect)):
-          # print(f'Collision with {object}!')
-          # print(f"Player rect: {side_rect.topleft}, {side_rect.bottomright}")
-          # print(f"Object rect: {object.side_rect.topleft}, {object.side_rect.bottomright}")
           return False
-      # print("no coll")
-      return True
-
+    return True
 
   def correctPosition(self, player, camera_view):
     if (camera_view == 'side'):
@@ -51,6 +41,13 @@ class Map:
           print(f"top: {object.top_rect.top}, bottom: {object.top_rect.bottom}")
           player.position.y = object.top_rect.top - PLAYER_SIZE
           #print("Boom!")
+    
+  def fallToNearestObject(self, player, camera_view):
+    target = Vector3(player.position.x, player.position.y, player.position.z + 3)
+    while player.can_fall(self, camera_view) and target.z < 400:
+      player.moveToPosition(player.position, target, self, camera_view)
+      target.z += 1
+    self.correctPosition(player, camera_view)
 
 
 

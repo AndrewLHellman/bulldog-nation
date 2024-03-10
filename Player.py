@@ -60,6 +60,11 @@ class Player:
         self.position = Vector3(new_pos.x, old_pos.y, new_pos.z)
       elif map.canPlayerMoveToPosition(Vector3(new_pos.x, new_pos.y, old_pos.z), self, camera_view):
         self.position = Vector3(new_pos.x, new_pos.y, old_pos.z)
+      else:
+        print("can't move")
+        return False
+    self.side_rect.update((self.position.x, self.position.z), (self.side_rect.width, self.side_rect.height))
+    return True
       # else:
       #   print("can't move!")
 
