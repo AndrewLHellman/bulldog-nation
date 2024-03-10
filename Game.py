@@ -14,6 +14,10 @@ class Game:
     img = pygame.image.load('source/sprites/CameraOverlay.png')
     img.set_colorkey((0,0,0))
     self.camera_surf = pygame.transform.scale(img, (1920, 1080))
+    img = pygame.image.load('source/sprites/AlienIcon.png')
+    img.set_colorkey((0,0,0))
+    self.alien_surf = pygame.transform.scale(img, (64, 64))
+
   
   def render(self, screen):
     self.map.render(screen, self.camera_view, self.player.position)
@@ -25,6 +29,8 @@ class Game:
     text_surface = font.render(self.camera_view.upper(), False, (255, 255, 255))
     screen.blit(text_surface, (100,967))
       # screen.blit()
+    for i in range(self.player.score):
+      screen.blit(self.alien_surf, (1830 - 64*i, 35))
 
 
   def toggleCameraView(self):
