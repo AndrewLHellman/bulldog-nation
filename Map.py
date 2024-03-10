@@ -4,6 +4,7 @@ from PlatformerGroundObject import PlatformerGroundObject
 from Player import PLAYER_SIZE
 from random import randint
 from TextObject import TextObject
+import pygame
 
 class Map:
   def __init__(self):
@@ -54,6 +55,7 @@ class Map:
           if hasattr(object, 'collectable') and object.collectable:
             self.objects.remove(object)
             player.score += 1
+            pygame.mixer.Sound("source/game-start-6104.mp3").play()
             continue
           return False
     else:
@@ -63,6 +65,7 @@ class Map:
           if hasattr(object, 'collectable') and object.collectable:
             self.objects.remove(object)
             player.score += 1
+            pygame.mixer.Sound("source/game-start-6104.mp3").play()
             continue
           return False
     return True
