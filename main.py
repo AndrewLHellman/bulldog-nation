@@ -18,7 +18,6 @@ def main():
     # https://uppbeat.io/t/danijel-zambo/stardust
     # License code: OOGMCXYLXE36LVGM
     file = 'source/stardust-danijel-zambo-main-version-03-13-1372.mp3'
-    pygame.init()
     pygame.mixer.init()
     pygame.mixer.music.load(file)
     pygame.mixer.music.play(-1)
