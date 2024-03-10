@@ -19,8 +19,8 @@ class Map:
     self.objects.append(BoxObject(Vector3(3912.5, 37.5, 130), Vector3(75, 75, 75), collectable=True, top_image='./source/sprites/SpecimenTop.png', side_image='./source/sprites/SpecimenSide.png'))
     self.objects.append(BoxObject(Vector3(3600, -350, -600), Vector3(700, 700, 600), top_image='./source/sprites/CloudObstacleTop.png', side_image='./source/sprites/CloudObstacleSide.png'))
     self.objects.append(TextObject(Vector3(-750, -200, -200), "Spencer's Trip to Mars"))
-    self.objects.append(TextObject(Vector3(-700, 300, 300), 'Move right to start'))
-    self.objects.append(TextObject(Vector3(1000, 0, -1000), 'Press Tab to switch cameras'))
+    self.objects.append(TextObject(Vector3(-720, 300, 300), 'Move right to start'))
+    self.objects.append(TextObject(Vector3(1000, 200, -1000), 'Press Tab to switch cameras'))
     self.objects.append(TextObject(Vector3(1200, -300, 20), 'Collect 5 aliens to win!'))
 
   def render(self, screen, camera_view, p_pos):

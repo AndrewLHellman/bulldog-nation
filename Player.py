@@ -9,8 +9,8 @@ PLAYER_SIZE = 96
 Z_ACCEL = 0.05
 MAX_Z_VELOCITY = 15
 
-pygame.font.init()
 # print(pygame.font.get_fonts())
+pygame.font.init()
 font = pygame.font.SysFont('sourcecodepro', 30)
 
 class Player:
@@ -152,7 +152,7 @@ class Player:
     else:
       screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
       # print(self.position.x, self.position.z)
-    text_surface = font.render("(%.2f, %.2f, %.2f)         %d points" % (self.position.x, self.position.y, self.position.z, self.score), False, (0, 0, 0))
+    # text_surface = font.render("(%.2f, %.2f, %.2f)         %d points" % (self.position.x, self.position.y, self.position.z, self.score), False, (0, 0, 0))
 
-    screen.blit(text_surface, (0,0))
+    # screen.blit(text_surface, (0,0))
     
