@@ -24,8 +24,8 @@ def main():
         game.render(screen)
 
         pygame.display.flip()
-
-    clock.tick(1000/60)
+        
+        clock.tick(60)
 
     pygame.quit()
 
