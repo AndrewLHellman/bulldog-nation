@@ -25,7 +25,7 @@ def main():
 
 
     while (running):
-        while game.player.score < 4:
+        while running and game.player.score < 4:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
