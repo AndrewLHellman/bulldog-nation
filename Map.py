@@ -18,7 +18,7 @@ class Map:
     self.objects.append(BoxObject(Vector3(2230, -37.5, -515), Vector3(75, 75, 75), collectable=True, top_image='./source/sprites/SpecimenTop.png', side_image='./source/sprites/SpecimenSide.png'))
     self.objects.append(BoxObject(Vector3(3912.5, 37.5, 130), Vector3(75, 75, 75), collectable=True, top_image='./source/sprites/SpecimenTop.png', side_image='./source/sprites/SpecimenSide.png'))
     self.objects.append(BoxObject(Vector3(3600, -350, -600), Vector3(700, 700, 600), top_image='./source/sprites/CloudObstacleTop.png', side_image='./source/sprites/CloudObstacleSide.png'))
-    self.objects.append(BoxObject(Vector3(4800,-300,-300), Vector3(200, 600, 600), is_walkable=True))
+    self.objects.append(BoxObject(Vector3(4800,-300,-300), Vector3(200, 600, 600), is_walkable=True, top_image='./source/sprites/RampTop.png', side_image='./source/sprites/RampSide.png'))
     self.objects.append(BoxObject(Vector3(4800,-300,-300), Vector3(1, 600, 0), transparent=True))
     self.objects.append(BoxObject(Vector3(5000,-300,-300), Vector3(1, 600, 0), transparent=True))
     self.objects.append(BoxObject(Vector3(4800,-300,-300), Vector3(200, 1, 0), transparent=True))
