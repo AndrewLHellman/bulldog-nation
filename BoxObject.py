@@ -2,17 +2,27 @@ import pygame
 from MapObject import MapObject
 
 
-class BoxObject(MapObject):
-  def __init__(self, pos, dims, color, transparent = False):
+class BoxObject(MapObject, pygame.sprite.Sprite):
+  def __init__(self, pos, dims, color = (0, 0, 0), collectable = False, top_image = '', side_image = '', transparent = False):
+    super(BoxObject, self).__init__()
     self.pos = pos
     self.width = dims.x
     self.depth = dims.y
     self.height = dims.z
-    self.top_surf = pygame.surface.Surface((self.width, self.depth))
     self.color = (color)
-    self.top_surf.fill(self.color)
+    self.collectable = collectable
+    self.top_surf = pygame.surface.Surface((self.width, self.depth))
+    if not top_image:
+      self.top_surf.fill(self.color)
+    else:
+      img = pygame.image.load(f'{top_image}')
+      self.top_surf = pygame.transform.scale(img, (self.width, self.depth))
     self.side_surf = pygame.surface.Surface((self.width, self.height))
-    self.side_surf.fill(self.color)
+    if not side_image:
+      self.side_surf.fill(self.color)
+    else:
+      img = pygame.image.load(f'{side_image}')
+      self.side_surf = pygame.transform.scale(img, (self.width, self.height))
     if transparent:
       self.side_surf.set_colorkey(color)
       self.top_surf.set_colorkey(color)

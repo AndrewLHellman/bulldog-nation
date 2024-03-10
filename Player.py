@@ -39,6 +39,7 @@ class Player:
     self.top_rect = self.top_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.y + PLAYER_SIZE/2))
     self.side_rect = self.side_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.z + PLAYER_SIZE/2))
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 + self.position.y, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
+    self.score = 0
 
 
 
@@ -141,6 +142,7 @@ class Player:
     else:
       screen.blit(self.side_surf, [self.render_pos.x, self.render_pos.z, PLAYER_SIZE, PLAYER_SIZE])
       # print(self.position.x, self.position.z)
-    text_surface = font.render("(%.2f, %.2f, %.2f)" % (self.position.x, self.position.y, self.position.z), False, (0, 0, 0))
+    text_surface = font.render("(%.2f, %.2f, %.2f)         %d points" % (self.position.x, self.position.y, self.position.z, self.score), False, (0, 0, 0))
+
     screen.blit(text_surface, (0,0))
     
