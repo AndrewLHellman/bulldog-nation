@@ -55,7 +55,10 @@ class Player:
     # print(f"can fall: {self.can_fall(map, camera_view)} {self.position.x}")
     if self.is_jump_pressed or not self.can_fall(map, camera_view):
       self.is_jump_pressed = True
-      self.index = (self.index + 1) % (len(self.side_img[self.facing_lr]['jump']) * 10)
+      if vec.z != 0:
+        self.index = (self.index + 1) % (len(self.side_img[self.facing_lr]['jump']) * 10)
+      else:
+        self.is_jump_pressed = False
       vec.z *= THRUST_SPEED
     else:
       vec.z = 0
@@ -113,6 +116,7 @@ class Player:
     if self.is_jump_pressed:
       self.side_surf = self.side_img[self.facing_lr]['jump'][self.index // (len(self.side_img[self.facing_lr]['jump']) * 5)]
     else:
+      # print(f"is jump pressed: {self.is_jump_pressed}")
       self.side_surf = self.side_img[self.facing_lr]['no-jump'][0]
 
 
