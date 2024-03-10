@@ -4,17 +4,10 @@ from Vector3 import Vector3
 from random import randint
 
 class PlatformerGroundObject(MapObject):
-<<<<<<< HEAD
   def __init__(self, x, y):
     self.pos = Vector3(x , y,200)
     self.width = 256
     self.depth = 256
-=======
-  def __init__(self, x):
-    self.pos = Vector3(x ,-600,200)
-    self.width = 2000
-    self.depth = 1200
->>>>>>> 5495baefc4520f9971e1373188b4c7e546cb1a35
     self.height = 500
     self.top_surf = pygame.surface.Surface((self.width, self.depth))
     img = pygame.image.load(f'./source/sprites/TopDownFloor-{min(randint(1, 5), 3)}.png').convert()
