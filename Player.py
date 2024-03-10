@@ -14,7 +14,7 @@ my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 class Player:
   def __init__(self, screen):
-    self.position = Vector3(0,0, 200)
+    self.position = Vector3(0,0, 0)
     self.z_velocity = 0
     self.top_surf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
     self.top_surf.fill((255, 0, 0))
@@ -52,7 +52,7 @@ class Player:
   def moveToPosition(self, old_pos, new_pos, map, camera_view):
     if old_pos.x != new_pos.x or old_pos.y != new_pos.y or old_pos.z != new_pos.z:
       if map.canPlayerMoveToPosition(new_pos, self, camera_view):
-        print('no conflict')
+        # print('no conflict')
         self.position = new_pos
       elif map.canPlayerMoveToPosition(Vector3(old_pos.x, new_pos.y, new_pos.z), self, camera_view):
         self.position = Vector3(old_pos.x, new_pos.y, new_pos.z)
@@ -60,15 +60,17 @@ class Player:
         self.position = Vector3(new_pos.x, old_pos.y, new_pos.z)
       elif map.canPlayerMoveToPosition(Vector3(new_pos.x, new_pos.y, old_pos.z), self, camera_view):
         self.position = Vector3(new_pos.x, new_pos.y, old_pos.z)
+      # else:
+      #   print("can't move!")
 
 
   def can_fall(self, map, camera_view):
-    return self.position.z < 199 and map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 1), self, camera_view)
+    return map.canPlayerMoveToPosition(Vector3(self.position.x, self.position.y, self.position.z + 1), self, camera_view)
 
   def update(self, keys, camera_view, screen, map):
     self.handleKeys(keys, camera_view, map)
     # print(self.position.z)
-    if self.can_fall(map, camera_view):
+    if camera_view == 'side' and self.can_fall(map, camera_view):
       self.z_velocity += Z_ACCEL
       # print(f"z velo: {self.z_velocity}")
       self.z_velocity = min(self.z_velocity, MAX_Z_VELOCITY)
@@ -79,7 +81,7 @@ class Player:
       # exit(0)
     else:
       self.z_velocity = 0
-    self.position.z = min(self.position.z, 200)
+    # self.position.z = min(self.position.z, 200)
     # print(f"Player ({self.position.x}, {self.position.y}, {self.position.z})")
     self.top_rect.update((self.position.x, self.position.y), (self.top_rect.width, self.top_rect.height))
     self.side_rect.update((self.position.x, self.position.z), (self.side_rect.width, self.side_rect.height))

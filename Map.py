@@ -20,8 +20,8 @@ class Map:
       for object in self.objects:
         if object.top_rect != None and (top_rect.colliderect(object.top_rect)):
           # print(f'Collision with {object}!')
-          print(f"Player rect: {top_rect.topleft}, {top_rect.bottomright}")
-          print(f"Object rect: {object.top_rect.topleft}, {object.top_rect.bottomright}")
+          # print(f"Player rect: {top_rect.topleft}, {top_rect.bottomright}")
+          # print(f"Object rect: {object.top_rect.topleft}, {object.top_rect.bottomright}")
           return False
       # print("no coll")
       return True
@@ -30,8 +30,8 @@ class Map:
       for object in self.objects:
         if object.side_rect != None and (side_rect.colliderect(object.side_rect)):
           # print(f'Collision with {object}!')
-          print(f"Player rect: {side_rect.topleft}, {side_rect.bottomright}")
-          print(f"Object rect: {object.side_rect.topleft}, {object.side_rect.bottomright}")
+          # print(f"Player rect: {side_rect.topleft}, {side_rect.bottomright}")
+          # print(f"Object rect: {object.side_rect.topleft}, {object.side_rect.bottomright}")
           return False
       # print("no coll")
       return True
