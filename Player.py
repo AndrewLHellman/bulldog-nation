@@ -24,14 +24,13 @@ class Player:
       self.side_img[dir] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     self.index = 0
     self.is_jump_pressed = False
-    img = pygame.image.load(f'./source/sprites/PlayerRobotSideRight.png')
-    self.side_img['Right'] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
+    for dir in ['Right', 'Left']:
+      img = pygame.image.load(f'./source/sprites/PlayerRobotSide{dir}.png')
+      self.side_img[dir] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     # for i in range(6):
     #   img = pygame.image.load(f'./source/sprites/PlayerWalkingRight-{i}.png').convert()
     #   img.set_colorkey((0,0,0))
     #   self.img['Right'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
-    img = pygame.image.load('./source/sprites/PlayerRobotSideLeft.png')
-    self.side_img['Left'] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     self.facing_lr = 'Right'
     self.facing_nsew = 'East'
     self.top_surf = self.side_img[self.facing_nsew]
