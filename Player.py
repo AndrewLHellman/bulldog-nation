@@ -16,21 +16,25 @@ class Player:
   def __init__(self, screen):
     self.position = Vector3(0,0, 200-PLAYER_SIZE)
     self.z_velocity = 0
-    self.top_surf = pygame.surface.Surface((PLAYER_SIZE, PLAYER_SIZE))
-    self.top_surf.fill((255, 0, 0))
-    self.img = {}
+    self.top_img = {}
+    self.side_img = {}
+    for dir in ['North', 'South', 'East', 'West']:
+      img = pygame.image.load(f'./source/sprites/PlayerRobotTop{dir}.png')
+      self.side_img[dir] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     self.index = 0
     self.is_jump_pressed = False
-    img = pygame.image.load(f'./source/sprites/PlayerRobotRight.png')
-    self.img['Right'] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
+    img = pygame.image.load(f'./source/sprites/PlayerRobotSideRight.png')
+    self.side_img['Right'] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     # for i in range(6):
     #   img = pygame.image.load(f'./source/sprites/PlayerWalkingRight-{i}.png').convert()
     #   img.set_colorkey((0,0,0))
     #   self.img['Right'].append(pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE)))
-    img = pygame.image.load('./source/sprites/PlayerRobotLeft.png')
-    self.img['Left'] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
+    img = pygame.image.load('./source/sprites/PlayerRobotSideLeft.png')
+    self.side_img['Left'] = pygame.transform.scale(img, (PLAYER_SIZE, PLAYER_SIZE))
     self.facing_lr = 'Right'
-    self.side_surf = self.img[self.facing_lr]
+    self.facing_nsew = 'East'
+    self.top_surf = self.side_img[self.facing_nsew]
+    self.side_surf = self.side_img[self.facing_lr]
     self.top_rect = self.top_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.y + PLAYER_SIZE/2))
     self.side_rect = self.side_surf.get_rect(center=(self.position.x + PLAYER_SIZE/2, self.position.z + PLAYER_SIZE/2))
     self.render_pos = Vector3(screen.get_width()/2 - PLAYER_SIZE/2, screen.get_height()/2 - PLAYER_SIZE/2 + self.position.y, screen.get_height()/2 - PLAYER_SIZE/2 - self.position.z)
@@ -95,7 +99,8 @@ class Player:
       # self.side_surf = self.img[self.facing_lr][self.index // 70]
       
     # else:
-    self.side_surf = self.img[self.facing_lr]
+    self.top_surf = self.side_img[self.facing_nsew]
+    self.side_surf = self.side_img[self.facing_lr]
 
 
   def handleKeys(self, keys, camera_view, map):
@@ -103,14 +108,20 @@ class Player:
     dy = 0 # y is the non-x direction here
     if keys[pygame.K_w]:
       dy = -1
+      if camera_view == 'top':
+        self.facing_nsew = 'North'
     elif keys[pygame.K_s]:
       dy = 1
+      if camera_view == 'top':
+        self.facing_nsew = 'South'
     if keys[pygame.K_d]:
       dx = 1
       self.facing_lr = 'Right'
+      self.facing_nsew = 'East'
     #  self.index = (self.index + 1) % (len(self.img['Right']) * 70)
     elif keys[pygame.K_a]:
       dx = -1
+      self.facing_nsew = 'West'
       self.facing_lr = 'Left'
     if camera_view == 'top':
       self.move(Vector3(dx, dy, 0), map, camera_view)

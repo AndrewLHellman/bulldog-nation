@@ -2,14 +2,17 @@ from BoxObject import BoxObject
 from Vector3 import Vector3
 from PlatformerGroundObject import PlatformerGroundObject
 from Player import PLAYER_SIZE
+from random import randint
 
 class Map:
   def __init__(self):
     self.objects = []
-    for i in range(-5000, 5001, 256):
-      for j in range(-700, 700, 256):
-        self.objects.append(PlatformerGroundObject(-i, j))
-    self.objects.append(BoxObject(Vector3(100, 100, 0), 100, 100, 100))
+    for i in range(-5000, 5001, 250):
+      for j in range(-700, 700, 250):
+        self.objects.append(PlatformerGroundObject(i, j, min(randint(1, 5), 3)))
+    for i in range(-700, 700, 250):
+      self.objects.append(PlatformerGroundObject(750, i, randint(4, 5)))
+    self.objects.append(BoxObject(Vector3(100, 100, 0), 100, 200, 50))
 
   def render(self, screen, camera_view, p_pos):
     for object in self.objects:
