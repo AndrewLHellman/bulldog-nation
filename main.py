@@ -23,7 +23,7 @@ def main():
         game.update(keys, screen)
         # pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
         game.render(screen)
-        screen.blit(font.render("%d" % clock.get_fps(), False, (0, 0, 0)), (1800, 0))
+        # screen.blit(font.render("%d" % clock.get_fps(), False, (0, 0, 0)), (1800, 0))
         pygame.display.flip()
         
         clock.tick(60)
