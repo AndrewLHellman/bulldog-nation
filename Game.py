@@ -16,6 +16,9 @@ class Game:
 
   def toggleCameraView(self):
     self.camera_view = 'side' if self.camera_view == 'top' else 'top'
+    if not self.map.canPlayerMoveToPosition(self.player.position, self.player, self.camera_view):
+      print('INSIDE BLOCK')
+      self.map.correctPosition(self.player, self.camera_view)
 
   def update(self, keys, screen):
     self.handleKeys(keys)

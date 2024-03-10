@@ -41,6 +41,20 @@ class Map:
       return True
 
 
+  def correctPosition(self, player, camera_view):
+    if (camera_view == 'side'):
+      for object in self.objects:
+        if (player.side_rect.colliderect(object.side_rect)):
+          print(f"top: {object.side_rect.top}, bottom: {object.side_rect.bottom}")
+          player.position.z = object.side_rect.top - PLAYER_SIZE
+          #print("Boom!")
+    else:
+      for object in self.objects:
+        if object.top_rect != None and (player.top_rect.colliderect(object.top_rect)):
+          print(f"top: {object.top_rect.top}, bottom: {object.top_rect.bottom}")
+          player.position.y = object.top_rect.top - PLAYER_SIZE
+          #print("Boom!")
+
 
 
   def detectPlayerCollision(self):
