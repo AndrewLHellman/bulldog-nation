@@ -9,11 +9,9 @@ class Map:
     self.objects = []
     for i in range(-5000, 5001, 250):
       for j in range(-700, 700, 250):
-        self.objects.append(PlatformerGroundObject(i, j, min(randint(1, 5), 3)))
-    for i in range(-700, 700, 250):
-      self.objects.append(PlatformerGroundObject(750, i, randint(4, 5)))
+        self.objects.append(PlatformerGroundObject(i, j, min(randint(1, 5), 3)) if i != 750 else PlatformerGroundObject(750, j, randint(4, 5), 1))
     self.objects.append(BoxObject(Vector3(100, 100, 0), Vector3(100, 200, 50), (0, 0, 255)))
-    self.objects.append(BoxObject(Vector3(750, -700, 150), Vector3(250, 1400, 50), (255, 255, 255, 0), True))
+    self.objects.append(BoxObject(Vector3(837.5, -700, 150), Vector3(75, 1400, 50), (255, 255, 255, 0), True))
 
   def render(self, screen, camera_view, p_pos):
     for object in self.objects:
