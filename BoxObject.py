@@ -3,7 +3,7 @@ from MapObject import MapObject
 
 
 class BoxObject(MapObject, pygame.sprite.Sprite):
-  def __init__(self, pos, dims, color = (0, 0, 0), collectable = False, top_image = '', side_image = '', transparent = False):
+  def __init__(self, pos, dims, color = (0, 0, 0), collectable = False, top_image = '', side_image = '', transparent = False, is_walkable = False):
     super(BoxObject, self).__init__()
     self.pos = pos
     self.width = dims.x
@@ -29,6 +29,8 @@ class BoxObject(MapObject, pygame.sprite.Sprite):
       self.side_surf.set_colorkey(color)
       self.top_surf.set_colorkey(color)
     self.top_rect = self.top_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.y + self.depth/2))
+    if is_walkable:
+      self.top_rect = None
     self.side_rect = self.side_surf.get_rect(center=(self.pos.x + self.width/2, self.pos.z + self.height/2))
 
   def render(self, screen, camera_view, p_pos):
